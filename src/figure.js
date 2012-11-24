@@ -16,6 +16,7 @@ var Figure = (function(){
     this.minY = this.coord.y - this.center.y
     this.maxX = this.minX + this.box.w
     this.maxY = this.minY + this.box.h
+
     count++
     this.id = count
   }

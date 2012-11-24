@@ -28,6 +28,13 @@ document.addEventListener('DOMContentLoaded', function(){
 
   arr.forEach(function(e){
     e.clickEvent(function(){
+      var c = Math.round(Math.random()*4048)
+      if(c < 0xf)
+        c = '00'+c.toString(16)
+      else if(c < 0xff)
+        c = '0'+c.toString(16)
+      e.color = c.toString(16)
+      console.log(e.color)
       console.log('click '+e.id)
     })
   })
@@ -45,7 +52,9 @@ document.addEventListener('DOMContentLoaded', function(){
 })
 
 var draw = function(){
-  a.draw()
-  b.draw()
-  c.draw()
+  var arr = [a, b, c]
+
+  arr.forEach(function(e){
+    e.draw()
+  })
 }
