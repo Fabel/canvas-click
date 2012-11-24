@@ -1,5 +1,7 @@
 var Figure = (function(){
 
+  var count = 0
+
   var Figure = function(x,y, width, height, centerX, centerY, color){
     if(typeof centerX == 'undefined'){
       centerX = width/2
@@ -14,14 +16,17 @@ var Figure = (function(){
     this.minY = this.coord.y - this.center.y
     this.maxX = this.minX + this.box.w
     this.maxY = this.minY + this.box.h
+    count++
+    this.id = count
   }
 
   Figure.prototype = new function() {
     this.draw = function(){
       var posX = this.coord.x - this.center.x
       var posY = this.coord.y - this.center.y
+      ctx.beginPath()
       ctx.fillStyle = this.color
-      ctx.fillRect(posX, posY, this.box.w, this.box.h)
+      ctx.rect(posX, posY, this.box.w, this.box.h)
       ctx.fill()
       return this
     }
@@ -40,6 +45,9 @@ var Figure = (function(){
         return true
       else
         return false
+    }
+    this.count = function(){
+      return count
     }
   }
 

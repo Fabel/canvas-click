@@ -2,7 +2,19 @@ var $ = window
 
 var ctx = null
 
+var canvas = null
+
+$.addEventListener('resize', function(){
+  canvas.width = document.body.clientWidth
+  canvas.height = document.body.clientHeight
+})
+
 document.addEventListener('DOMContentLoaded', function(){
+  canvas = document.createElement('canvas')
+  canvas.width = document.body.clientWidth
+  canvas.height = document.body.clientHeight
+  document.body.appendChild(canvas)
+
   ctx = canvas.getContext('2d')
   var objects = []
   a = new Figure(0,0,50,50, 0, 0, "red")
@@ -12,14 +24,12 @@ document.addEventListener('DOMContentLoaded', function(){
   objects.push(b)
   objects.push(c)
 
-  a.clickEvent(function(event){
-    console.log('click A')
-  })
-  b.clickEvent(function(event){
-    console.log('click B')
-  })
-  c.clickEvent(function(event){
-    console.log('click C')
+  var arr = [a, b, c]
+
+  arr.forEach(function(e){
+    e.clickEvent(function(){
+      console.log('click '+e.id)
+    })
   })
 
   canvas.addEventListener('click', function(event){
@@ -30,8 +40,12 @@ document.addEventListener('DOMContentLoaded', function(){
     console.log(event.clientX, event.clientY)
   })
 
+
+  setInterval(draw, 30)
+})
+
+var draw = function(){
   a.draw()
   b.draw()
   c.draw()
-
-})
+}
